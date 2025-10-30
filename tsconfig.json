@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "jsx": "react-jsx",
+    "declaration": true,
+    "outDir": "lib",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "lib": ["esnext"],               // 👈 no 'dom' — this avoids global clashes
+    "types": ["react", "react-native"], // 👈 no '@types/node'
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": ["node_modules", "lib", "**/__tests__/**"]
+}
