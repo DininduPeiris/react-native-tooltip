@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Pressable,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 interface TooltipProps {
   content: string;
@@ -16,57 +10,35 @@ const Tooltip = ({ content, children }: TooltipProps) => {
   const [visible, setVisible] = useState(false);
 
   return (
-    <View style={styles.root}>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={() => setVisible(!visible)}>
+        {children}
+      </TouchableOpacity>
       {visible && (
-        // Background overlay
-        <Pressable style={styles.overlay} onPress={() => setVisible(false)} />
+        <View style={styles.tooltip}>
+          <Text style={styles.text}>{content}</Text>
+        </View>
       )}
-
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => setVisible(!visible)}
-          activeOpacity={0.8}
-        >
-          {children}
-        </TouchableOpacity>
-
-        {visible && (
-          <View style={styles.tooltip}>
-            <Text style={styles.text}>{content}</Text>
-          </View>
-        )}
-      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  root: {
-    position: "relative",
-  },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0, 0, 0, 0.4)", // translucent gray/black overlay
-    zIndex: 1,
-  },
-  container: {
-    position: "relative",
-    alignItems: "center",
-    zIndex: 2, // ensures tooltip and trigger appear above overlay
-  },
+  container: { position: "relative" },
   tooltip: {
     position: "absolute",
-    top: -45,
-    backgroundColor: "#333",
-    paddingVertical: 6,
-    paddingHorizontal: 10,
-    borderRadius: 6,
-    zIndex: 3,
+    top: -40,
+    backgroundColor: "#fff",
+    width: 300,
+    padding: 12,
+    borderRadius: 8,
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    elevation: 5,
   },
-  text: {
-    color: "#fff",
-    fontSize: 14,
-  },
+  text: { color: "#fff" },
 });
 
 export default Tooltip;
