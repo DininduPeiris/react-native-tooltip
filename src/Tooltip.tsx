@@ -58,9 +58,9 @@ const styles = StyleSheet.create({
   },
   tooltip: {
     position: "absolute",
-    top: 20,
+    top: 25,
     backgroundColor: "#fff",
-    padding: 12,
+    padding: 8,
     borderRadius: 8,
     shadowColor: "#000",
     shadowOpacity: 0.2,
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
   closeIcon: {
     fontSize: 16,
     color: "#888",
-    paddingHorizontal: 4,
   },
   contentText: {
     color: "#333",
