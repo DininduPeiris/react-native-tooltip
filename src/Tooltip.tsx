@@ -32,10 +32,18 @@ const Tooltip = ({
       <TouchableOpacity onPress={() => setVisible(!visible)}>
         {children}
       </TouchableOpacity>
+
       {visible && (
         <View style={[styles.tooltip, { width }]}>
-          {title && <Text style={titleStyle}>{title}</Text>}
-          <Text style={textStyle}>{content}</Text>
+          {title && (
+            <View style={styles.titleRow}>
+              <Text style={[styles.titleText, titleStyle]}>{title}</Text>
+              <TouchableOpacity onPress={() => setVisible(false)}>
+                <Text style={styles.closeIcon}>✕</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          <Text style={[styles.contentText, textStyle]}>{content}</Text>
         </View>
       )}
     </View>
@@ -43,10 +51,12 @@ const Tooltip = ({
 };
 
 const styles = StyleSheet.create({
-  container: { position: "relative" },
+  container: {
+    position: "relative",
+  },
   tooltip: {
     position: "absolute",
-    top: -40,
+    top: 40,
     backgroundColor: "#fff",
     padding: 12,
     borderRadius: 8,
@@ -55,6 +65,26 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
     elevation: 5,
+  },
+  titleRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 6,
+  },
+  titleText: {
+    fontWeight: "bold",
+    fontSize: 16,
+    color: "#000",
+  },
+  closeIcon: {
+    fontSize: 16,
+    color: "#888",
+    paddingHorizontal: 4,
+  },
+  contentText: {
+    color: "#333",
+    fontSize: 14,
   },
 });
 
