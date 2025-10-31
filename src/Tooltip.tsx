@@ -1,12 +1,30 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 interface TooltipProps {
+  title?: string;
   content: string;
+  titleStyle?: StyleProp<TextStyle>;
+  textStyle?: StyleProp<TextStyle>;
+  width?: number;
   children: React.ReactNode;
 }
 
-const Tooltip = ({ content, children }: TooltipProps) => {
+const Tooltip = ({
+  title,
+  content,
+  children,
+  titleStyle,
+  textStyle,
+  width = 150,
+}: TooltipProps) => {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -15,8 +33,9 @@ const Tooltip = ({ content, children }: TooltipProps) => {
         {children}
       </TouchableOpacity>
       {visible && (
-        <View style={styles.tooltip}>
-          <Text style={styles.text}>{content}</Text>
+        <View style={[styles.tooltip, { width }]}>
+          {title && <Text style={titleStyle}>{title}</Text>}
+          <Text style={textStyle}>{content}</Text>
         </View>
       )}
     </View>
@@ -29,7 +48,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: -40,
     backgroundColor: "#fff",
-    width: 300,
     padding: 12,
     borderRadius: 8,
     shadowColor: "#000",
@@ -38,7 +56,6 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  text: { color: "#fff" },
 });
 
 export default Tooltip;
