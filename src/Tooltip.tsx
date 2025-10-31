@@ -14,6 +14,7 @@ interface TooltipProps {
   titleStyle?: StyleProp<TextStyle>;
   textStyle?: StyleProp<TextStyle>;
   width?: number;
+  maxWidth?: number;
   children: React.ReactNode;
 }
 
@@ -23,7 +24,8 @@ const Tooltip = ({
   children,
   titleStyle,
   textStyle,
-  width = 150,
+  width,
+  maxWidth,
 }: TooltipProps) => {
   const [visible, setVisible] = useState(false);
 
@@ -34,7 +36,7 @@ const Tooltip = ({
       </TouchableOpacity>
 
       {visible && (
-        <View style={[styles.tooltip, { width }]}>
+        <View style={[styles.tooltip, { width, maxWidth }]}>
           {title && (
             <View style={styles.titleRow}>
               <Text style={[styles.titleText, titleStyle]}>{title}</Text>
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
   },
   tooltip: {
     position: "absolute",
-    top: 40,
+    top: 20,
     backgroundColor: "#fff",
     padding: 12,
     borderRadius: 8,
@@ -70,6 +72,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    gap: 5,
     marginBottom: 6,
   },
   titleText: {
