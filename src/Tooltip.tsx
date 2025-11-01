@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  LayoutChangeEvent,
   StyleProp,
   StyleSheet,
   Text,
@@ -35,34 +36,47 @@ const Tooltip = ({
   style,
 }: TooltipProps) => {
   const [visible, setVisible] = useState(false);
+  const [childLayout, setChildLayout] = useState<{ width: number; height: number }>({
+    width: 0,
+    height: 0,
+  });
+
+  const handleLayout = (event: LayoutChangeEvent) => {
+    const { width, height } = event.nativeEvent.layout;
+    setChildLayout({ width, height });
+  };
 
   const getTooltipPosition = (): ViewStyle => {
     switch (position) {
       case "bottom":
-        return { top: "100%", marginTop: 8, alignSelf: "center" };
+        return {
+          top: childLayout.height + 8,
+          alignSelf: "center",
+        };
       case "left":
         return {
-          // right: "100%",
-          marginRight: 8,
-          top: "50%",
+          right: childLayout.width + 8,
+          top: childLayout.height / 2,
           transform: [{ translateY: -25 }],
         };
       case "right":
         return {
-          // left: "100%",
-          marginLeft: 8,
-          top: "50%",
+          left: childLayout.width + 8,
+          top: childLayout.height / 2,
           transform: [{ translateY: -25 }],
         };
       case "top":
       default:
-        return { bottom: "100%", marginBottom: 8, alignSelf: "center" };
+        return {
+          bottom: childLayout.height + 8,
+          alignSelf: "center",
+        };
     }
   };
 
   return (
     <View style={[styles.container, style]}>
-      <TouchableOpacity onPress={() => setVisible(!visible)}>
+      <TouchableOpacity onLayout={handleLayout} onPress={() => setVisible(!visible)}>
         {children}
       </TouchableOpacity>
 
