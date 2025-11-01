@@ -104,10 +104,10 @@ Feel free to open an issue or submit a pull request on GitHub.
 
 ## 📄 License
 
-MIT © Dinindu Peiris
+MIT © [Dinindu Peiris](https://github.com/DininduPeiris)
 
 ## 🌟 Support
 
-If you like this package, please consider giving it a ⭐ on npm
- or GitHub
+If you like this package, please consider giving it a ⭐ on [npm](https://www.npmjs.com/~dinindupeiris)
+ or [GitHub](https://github.com/DininduPeiris)
 !
