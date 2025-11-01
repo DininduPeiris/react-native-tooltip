@@ -41,9 +41,19 @@ const Tooltip = ({
       case "bottom":
         return { top: "100%", marginTop: 8, alignSelf: "center" };
       case "left":
-        return { right: "100%", marginRight: 8 };
+        return {
+          right: "100%",
+          marginRight: 8,
+          top: "50%",
+          transform: [{ translateY: -25 }],
+        };
       case "right":
-        return { left: "100%", marginLeft: 8 };
+        return {
+          left: "100%",
+          marginLeft: 8,
+          top: "50%",
+          transform: [{ translateY: -25 }],
+        };
       case "top":
       default:
         return { bottom: "100%", marginBottom: 8, alignSelf: "center" };
@@ -57,7 +67,9 @@ const Tooltip = ({
       </TouchableOpacity>
 
       {visible && (
-        <View style={[styles.tooltip, { width, maxWidth }, getTooltipPosition()]}>
+        <View
+          style={[styles.tooltip, { width, maxWidth }, getTooltipPosition()]}
+        >
           {title && (
             <View style={styles.titleRow}>
               <Text style={[styles.titleText, titleStyle]}>{title}</Text>
