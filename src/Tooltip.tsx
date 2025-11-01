@@ -42,14 +42,14 @@ const Tooltip = ({
         return { top: "100%", marginTop: 8, alignSelf: "center" };
       case "left":
         return {
-          right: "100%",
+          // right: "100%",
           marginRight: 8,
           top: "50%",
           transform: [{ translateY: -25 }],
         };
       case "right":
         return {
-          left: "100%",
+          // left: "100%",
           marginLeft: 8,
           top: "50%",
           transform: [{ translateY: -25 }],
